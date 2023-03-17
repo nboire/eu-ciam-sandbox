@@ -6,45 +6,35 @@
 
     function GigyaLoadFunctions() {
          
-        var params = {
-            callback: function(e) {
-                console.log("session.verify ", e);
-                if(e.errorCode == 0) {
-                    // a session is open
-                    document.getElementById("logged").style.display = "block";
-                } else {
-                    // non session
-                    document.getElementById("logged").style.display = "none";
-                    gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen',enabledProviders: 'googleplus,facebook,apple'});
-                }
-            }
-        }
         try {
-            gigya.accounts.session.verify(params);
+            gigya.accounts.session.verify({
+                callback: function(e) {
+                    console.log("session.verify ", e);
+                    if(e.errorCode == 0) {
+                        // a session is open
+                        window.location.href="/account.html";
+                    } else {
+                        // non session
+                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen',enabledProviders: 'googleplus,facebook,apple'});
+                    }
+                }
+            });
         }catch(e) {
             console.e(e);
         }
 
         gigya.socialize.addEventHandlers({
-        onLogin: function () {
-            alert("user logged successfull");            
-            window.location.href="/account.html";
-        }
-    });
+            onLogin: function () {
+                alert("user logged successfull");            
+                window.location.href="/account.html";
+            }
+        });
     }
 
     function onGigyaServiceReady() {
         GigyaLoadFunctions();
     }
-            
-    function onLogout(response) {
-        if ( response.errorCode == 0 ) {
-            alert('You are now logged out');
-        }
-        else {
-            alert('Error :' + response.errorMessage);
-        }
-    }
+                
     var params = getParametersFromUrl();
     loadGigya( params['lang'] || navigator.language || navigator.userLanguage);
     </script>    
