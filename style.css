@@ -1,0 +1,53 @@
+body {
+  background: #f2f6f7;
+  margin: 0px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+}
+
+.block-content {
+  padding-top: 20px;
+}
+.gigya-screen {
+  background: #ffffff;
+}
+.gigya-screen h2 {
+  font-family: "Inter" !important;
+  font-style: normal !important;
+  font-weight: 800 !important;
+  font-size: 24px !important;
+  line-height: 24px !important;
+  color: #1a1b1b !important;
+}
+.gigya-screen.portrait .separator-wrapper {
+  height: auto !important;
+}
+a {
+  color: #0172f0 !important;
+}
+.subtitle {
+  font-size: 14px;
+  color: #2f3030;
+}
+.requirements {
+  color: #7c7d7d;
+  font-size: 12px;
+}
+#gigya-profile-form .newsletter-label label.subscription-name-label {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
+  color: #1a1b1b !important;
+}
+.newsletter-label-daily .subscription-name-label {
+  color: blue !important;
+}

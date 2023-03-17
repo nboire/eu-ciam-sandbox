@@ -1,0 +1,142 @@
+<html>
+<head>
+<script type="text/javascript" lang="javascript" src="//cdns.global.gigya.com/JS/gigya.js?apikey=4_P1PsLai8qySAAQGymJ4UuA"></script>
+<script>
+
+    function GigyaLoadFunctions() {
+            
+        /*
+        console.log("started gigya -> show screenset");
+        screens = [
+            'gigya-login-screen',
+            'gigya-login-success-screen',
+            'gigya-register-screen',
+            'gigya-complete-registration-screen',
+            'gigya-forgot-password-screen',
+            'gigya-forgot-password-success-screen',
+            'gigya-reset-password-screen',
+            'gigya-reset-password-success-screen',
+            'gigya-password-change-required-screen',
+            'gigya-verification-pending-screen',
+            'gigya-verification-sent-screen',
+            'gigya-email-verification-success-screen',
+            'gigya-email-verification-error-screen',
+            'gigya-change-email-screen',
+            'gigya-email-code-verification-screen',
+        ];
+    
+        for(var i=0; i < screens.length; i++) {
+            try {
+                gigya.accounts.showScreenSet({
+                    screenSet: 'Default-RegistrationLogin',
+                    startScreen: screens[i],
+                    containerID: screens[i]+"-block",
+                });
+            } catch(e) {
+                console.e(e);
+            }
+        }
+        */
+        var params = {
+            callback: function(e) {
+                console.log("session.verify ", e);
+                if(e.errorCode == 0) {
+                    // a session is open
+                    document.getElementById("logged").style.display = "block";
+                } else {
+                    // non session
+                    document.getElementById("logged").style.display = "none";
+                    gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen',enabledProviders: 'googleplus,facebook,apple'});
+                }
+            }
+        }
+        try {
+            gigya.accounts.session.verify(params);
+        }catch(e) {
+            console.e(e);
+        }
+
+        gigya.socialize.addEventHandlers({
+        onLogin: function () {
+            alert("user logged successfull");            
+            window.location.href="/account.html";
+        }
+    });
+    }
+
+    function onGigyaServiceReady() {
+        GigyaLoadFunctions();
+    }
+            
+    function onLogout(response) {
+        if ( response.errorCode == 0 ) {
+            alert('You are now logged out');
+        }
+        else {
+            alert('Error :' + response.errorMessage);
+        }
+    }
+    
+    </script>
+    <!-- 
+        Example Override style for local dev
+        Must integrate on screenset css section after.
+    -->
+    <link rel="stylesheet" href="/style.css">  
+</head>
+<body>
+<div class="header">
+<h1>Euronews</h1>
+</div>
+<div class="block-content">
+<div id="containerlogin"></div>
+</div>
+
+<!-- Link to display login or register form and profile after login 
+<p>
+    <a href="#" onclick="gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen'});">Login</a>
+</p>
+
+</br></br>
+-->
+
+<div id="logged" style="display: none;">
+    <div><h3 id="user"></h3></div>
+    <a href="#" onclick="gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Default-ProfileUpdate'});">Edit Your Profile</a>
+    </br></br></br>
+    <a href="#" onclick="gigya.accounts.logout({callback:onLogout});">Logout</a>
+</div>
+<div id="containerlogin"></div>
+
+<!-- List des screensets 
+<hr />
+
+<div>
+    <h1>Euronews - Screensets Registration</h1>
+    <h2>-- Login -</h2>
+    <h3>gigya-login-screen</h3><div id="gigya-login-screen-block"></div>
+    <h3>gigya-login-success-screen</h3><div id="gigya-login-success-screen-block"></div>
+    <h3>gigya-register-screen</h3><div id="gigya-register-screen-block"></div>
+    <h3>gigya-complete-registration-screen</h3><div id="gigya-complete-registration-screen-block"></div>
+
+    <h2>-- Reset Flow -</h2>
+    <h3>gigya-forgot-password-screen</h3><div id="gigya-forgot-password-screen-block"></div>
+    <h3>gigya-forgot-password-success-screen</h3><div id="gigya-forgot-password-success-screen-block"></div>
+    <h3>gigya-reset-password-screen</h3><div id="gigya-reset-password-screen-block"></div>
+    <h3>gigya-reset-password-success-screen</h3><div id="gigya-reset-password-success-screen-block"></div>
+    <h3>gigya-password-change-required-screen</h3><p>not use beause no expiration time</p><div id="gigya-password-change-required-screen-block"></div>
+-->    
+    <!--
+    <h2>-- Verification Account Flow -</h2>
+    <h3>gigya-verification-pending-screen</h3><div id="gigya-verification-pending-screen-block"></div>
+    <h3>gigya-verification-sent-screen</h3><div id="gigya-verification-sent-screen-block"></div>
+    <h3>gigya-email-verification-success-screen</h3><div id="gigya-email-verification-success-screen-block"></div>
+    
+    <h2>-- Other -</h2>
+    <h3>gigya-change-email-screen</h3><div id="gigya-change-email-screen-block"></div>
+    <h3>gigya-email-code-verification-screen</h3><div id="gigya-email-code-verification-screen-block"></div>    
+    -->
+</div>
+
+</body>
+</html>

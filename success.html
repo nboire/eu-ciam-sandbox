@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script
+      type="text/javascript"
+      lang="javascript"
+      src="//cdns.global.gigya.com/JS/gigya.js?apikey=4_P1PsLai8qySAAQGymJ4UuA"
+    ></script>
+    <script>
+      function GigyaLoadFunctions() {
+        gigya.accounts.showScreenSet({
+          containerID: "containerlogin",
+          screenSet: "Euronews-RegistrationLogin",
+          startScreen: "gigya-email-verify-screen"
+        });
+      }
+
+      function onGigyaServiceReady() {
+        GigyaLoadFunctions();
+      }
+
+      function onLogout(response) {
+        if (response.errorCode == 0) {
+          alert("You are now logged out");
+        } else {
+          alert("Error :" + response.errorMessage);
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Euronews</h1>
+    </div>
+    <div class="block-content">
+      <div id="containerlogin"></div>
+    </div>
+  </body>
+</html>
