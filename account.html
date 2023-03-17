@@ -1,101 +1,78 @@
 <html>
   <head>
-    <script
-      type="text/javascript"
-      lang="javascript"
-      src="//cdns.global.gigya.com/JS/gigya.js?apikey=4_P1PsLai8qySAAQGymJ4UuA"
-    ></script>
-    <script>
-      function GigyaLoadFunctions() {
+    <script type="text/javascript" lang="javascript" src="script.js"></script>
+<script>
 
-          /*
-          console.log("started gigya -> show screenset");
-          screens = [
-              'gigya-login-screen',
-              'gigya-login-success-screen',
-              'gigya-register-screen',
-              'gigya-complete-registration-screen',
-              'gigya-forgot-password-screen',
-              'gigya-forgot-password-success-screen',
-              'gigya-reset-password-screen',
-              'gigya-reset-password-success-screen',
-              'gigya-password-change-required-screen',
-              'gigya-verification-pending-screen',
-              'gigya-verification-sent-screen',
-              'gigya-email-verification-success-screen',
-              'gigya-email-verification-error-screen',
-              'gigya-change-email-screen',
-              'gigya-email-code-verification-screen',
-          ];
+    function GigyaLoadFunctions() {
+         
+        try {
+            gigya.accounts.session.verify({
+                callback: function(e) {
+                    console.log("session.verify ", e);
+                    if(e.errorCode == 0) {
+                        // a session is open
+                        window.location.href="/account.html";
+                    } else {
+                        // non session
+                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-ProfileUpdate', startScreen:'gigya-update-profile-screen',enabledProviders: 'googleplus,facebook,apple'});
+                    }
+                }
+            });
+        }catch(e) {
+            console.e(e);
+        }
 
-          for(var i=0; i < screens.length; i++) {
-              try {
-                  gigya.accounts.showScreenSet({
-                      screenSet: 'Default-RegistrationLogin',
-                      startScreen: screens[i],
-                      containerID: screens[i]+"-block",
-                  });
-              } catch(e) {
-                  console.e(e);
-              }
-          }
-          */
-          var params = {
-              callback: function(e) {
-                  console.log("session.verify ", e);
-                  if(e.errorCode == 0) {
-                      // a session is open
-                      gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-ProfileUpdate', startScreen:'gigya-update-profile-screen'});
-                  } else {
-                    window.location.href="/index.html";
-                  }
-              }
-          }
-          try {
-              gigya.accounts.session.verify(params);
-          }catch(e) {
-              console.e(e);
-          }
+        gigya.socialize.addEventHandlers({
+            onLogin: function () {
+                alert("user logged successfull");            
+                window.location.href="/account.html";
+            },
+            onLogout: function () {
+                alert("user logout successfull");            
+                window.location.href="/index.html";
+            },
 
-          gigya.socialize.addEventHandlers({
-          onLogin: function () {
-              alert("user logged successfull");
-          }
-      });
-      }
+        });
+    }
 
-      function onGigyaServiceReady() {
-          GigyaLoadFunctions();
-      }
-
-      function onLogout(response) {
-          if ( response.errorCode == 0 ) {
-              alert('You are now logged out');
-          }
-          else {
-              alert('Error :' + response.errorMessage);
-          }
-      }
-    </script>
-    <!-- 
-        Example Override style for local dev
-        Must integrate on screenset css section after.
-    -->
-    <link rel="stylesheet" href="/style.css" />
+    function onGigyaServiceReady() {
+        GigyaLoadFunctions();
+    }
+                
+    var params = getParametersFromUrl();
+    loadGigya( params['lang'] || navigator.language || navigator.userLanguage);
+    </script>    
+    <link rel="stylesheet" href="/style.css">  
   </head>
   <body>
     <div class="header">
       <img src="/img/logo.png">
-      </div>
+    </div>
+    <div class="langs">
+        <ul>
+            <li><a href="?lang=en">English(en)</a></li>
+            <li><a href="?lang=fr">French(fr)</a></li>
+            <li><a href="?lang=de">German(de)</a></li>
+            <li><a href="?lang=it">Italian(it)</a></li>
+            <li><a href="?lang=es">Spanish(es)</a></li>
+            <li><a href="?lang=pt">Portuguese(pt)</a></li>
+            <li><a href="?lang=ru">Russian(ru)</a></li>
+            <li><a href="?lang=ar">Arabic(ar)</a></li>
+            <li><a href="?lang=fa">Parsi(fa)</a></li>
+            <li><a href="?lang=tr">Turkish(tr)</a></li>
+            <li><a href="?lang=el">Greek(el)</a></li>
+            <li><a href="?lang=hu">Hungarian(hu)</a></li>
+        </ul>
+    </div>
     <div>
       <a href="account.html">Personal informations</a>
       <a href="newsletters.html">Newsletters</a>
-      <a href="#" onclick="gigya.accounts.logout({callback:onLogout});"
+      <a href="#" onclick="gigya.accounts.logout();"
         >Logout</a
       >
     </div>
     <div class="block-content">
-      <div id="containerlogin"></div>
+        <div id="containerlogin"></div>
     </div>
   </body>
 </html>
