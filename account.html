@@ -11,10 +11,10 @@
                     console.log("session.verify ", e);
                     if(e.errorCode == 0) {
                         // a session is open
-                        window.location.href="/account.html";
+                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-ProfileUpdate', startScreen:'gigya-update-profile-screen',enabledProviders: 'googleplus,facebook,apple'});
                     } else {
                         // non session
-                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-ProfileUpdate', startScreen:'gigya-update-profile-screen',enabledProviders: 'googleplus,facebook,apple'});
+                        window.location.href="/index.html";
                     }
                 }
             });
