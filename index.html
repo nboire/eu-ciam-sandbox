@@ -1,42 +1,11 @@
 <html>
 <head>
-<script type="text/javascript" lang="javascript" src="//cdns.global.gigya.com/JS/gigya.js?apikey=4_P1PsLai8qySAAQGymJ4UuA"></script>
+<!--script type="text/javascript" lang="javascript" src="//cdns.global.gigya.com/JS/gigya.js?apikey=4_P1PsLai8qySAAQGymJ4UuA"></script-->
+<script type="text/javascript" lang="javascript" src="script.js"></script>
 <script>
 
     function GigyaLoadFunctions() {
-            
-        /*
-        console.log("started gigya -> show screenset");
-        screens = [
-            'gigya-login-screen',
-            'gigya-login-success-screen',
-            'gigya-register-screen',
-            'gigya-complete-registration-screen',
-            'gigya-forgot-password-screen',
-            'gigya-forgot-password-success-screen',
-            'gigya-reset-password-screen',
-            'gigya-reset-password-success-screen',
-            'gigya-password-change-required-screen',
-            'gigya-verification-pending-screen',
-            'gigya-verification-sent-screen',
-            'gigya-email-verification-success-screen',
-            'gigya-email-verification-error-screen',
-            'gigya-change-email-screen',
-            'gigya-email-code-verification-screen',
-        ];
-    
-        for(var i=0; i < screens.length; i++) {
-            try {
-                gigya.accounts.showScreenSet({
-                    screenSet: 'Default-RegistrationLogin',
-                    startScreen: screens[i],
-                    containerID: screens[i]+"-block",
-                });
-            } catch(e) {
-                console.e(e);
-            }
-        }
-        */
+         
         var params = {
             callback: function(e) {
                 console.log("session.verify ", e);
@@ -76,67 +45,33 @@
             alert('Error :' + response.errorMessage);
         }
     }
-    
-    </script>
-    <!-- 
-        Example Override style for local dev
-        Must integrate on screenset css section after.
-    -->
+    var params = getParametersFromUrl();
+    loadGigya( params['lang'] || navigator.language || navigator.userLanguage);
+    </script>    
     <link rel="stylesheet" href="/style.css">  
 </head>
 <body>
 <div class="header">
-<img src="/img/logo.png">
+    <img src="/img/logo.png">
+</div>
+<div class="langs">
+    <ul>
+        <li><a href="?lang=en">English(en)</a></li>
+        <li><a href="?lang=fr">French(fr)</a></li>
+        <li><a href="?lang=de">German(de)</a></li>
+        <li><a href="?lang=it">Italian(it)</a></li>
+        <li><a href="?lang=es">Spanish(es)</a></li>
+        <li><a href="?lang=pt">Portuguese(pt)</a></li>
+        <li><a href="?lang=ru">Russian(ru)</a></li>
+        <li><a href="?lang=ar">Arabic(ar)</a></li>
+        <li><a href="?lang=fa">Parsi(fa)</a></li>
+        <li><a href="?lang=tr">Turkish(tr)</a></li>
+        <li><a href="?lang=el">Greek(el)</a></li>
+        <li><a href="?lang=hu">Hungarian(hu)</a></li>
+    </ul>
 </div>
 <div class="block-content">
-<div id="containerlogin"></div>
+    <div id="containerlogin"></div>
 </div>
-
-<!-- Link to display login or register form and profile after login 
-<p>
-    <a href="#" onclick="gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen'});">Login</a>
-</p>
-
-</br></br>
--->
-
-<div id="logged" style="display: none;">
-    <div><h3 id="user"></h3></div>
-    <a href="#" onclick="gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Default-ProfileUpdate'});">Edit Your Profile</a>
-    </br></br></br>
-    <a href="#" onclick="gigya.accounts.logout({callback:onLogout});">Logout</a>
-</div>
-<div id="containerlogin"></div>
-
-<!-- List des screensets 
-<hr />
-
-<div>
-    <h1>Euronews - Screensets Registration</h1>
-    <h2>-- Login -</h2>
-    <h3>gigya-login-screen</h3><div id="gigya-login-screen-block"></div>
-    <h3>gigya-login-success-screen</h3><div id="gigya-login-success-screen-block"></div>
-    <h3>gigya-register-screen</h3><div id="gigya-register-screen-block"></div>
-    <h3>gigya-complete-registration-screen</h3><div id="gigya-complete-registration-screen-block"></div>
-
-    <h2>-- Reset Flow -</h2>
-    <h3>gigya-forgot-password-screen</h3><div id="gigya-forgot-password-screen-block"></div>
-    <h3>gigya-forgot-password-success-screen</h3><div id="gigya-forgot-password-success-screen-block"></div>
-    <h3>gigya-reset-password-screen</h3><div id="gigya-reset-password-screen-block"></div>
-    <h3>gigya-reset-password-success-screen</h3><div id="gigya-reset-password-success-screen-block"></div>
-    <h3>gigya-password-change-required-screen</h3><p>not use beause no expiration time</p><div id="gigya-password-change-required-screen-block"></div>
--->    
-    <!--
-    <h2>-- Verification Account Flow -</h2>
-    <h3>gigya-verification-pending-screen</h3><div id="gigya-verification-pending-screen-block"></div>
-    <h3>gigya-verification-sent-screen</h3><div id="gigya-verification-sent-screen-block"></div>
-    <h3>gigya-email-verification-success-screen</h3><div id="gigya-email-verification-success-screen-block"></div>
-    
-    <h2>-- Other -</h2>
-    <h3>gigya-change-email-screen</h3><div id="gigya-change-email-screen-block"></div>
-    <h3>gigya-email-code-verification-screen</h3><div id="gigya-email-code-verification-screen-block"></div>    
-    -->
-</div>
-
 </body>
 </html>
