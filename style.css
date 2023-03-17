@@ -15,6 +15,11 @@ body {
 .block-content {
   padding-top: 20px;
 }
+
+#containerlogin h1.gigya-screen-caption {
+  display:none !important;
+}
+
 .gigya-screen {
   background: #ffffff;
 }
