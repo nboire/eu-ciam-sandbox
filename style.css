@@ -73,6 +73,6 @@ a {
   float: left;
   padding: 0 3px;
 }
-.langs ul li a {
-  font-size: 8px;
+div.langs ul li a {
+  font-size: 10px;
 }
