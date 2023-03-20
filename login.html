@@ -15,7 +15,11 @@
                         window.location.href="/account.html";
                     } else {
                         // non session
-                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen',enabledProviders: 'googleplus,facebook,apple'});
+                        let providers = 'googleplus,facebook,apple';
+                        if(params['lang'] == 'fr') {
+                            providers = 'googleplus,facebook';
+                        }
+                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen',enabledProviders: providers});
                     }
                 }
             });
