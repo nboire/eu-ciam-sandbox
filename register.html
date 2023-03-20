@@ -1,0 +1,72 @@
+<html>
+<head>
+<!--script type="text/javascript" lang="javascript" src="//cdns.global.gigya.com/JS/gigya.js?apikey=4_P1PsLai8qySAAQGymJ4UuA"></script-->
+<script type="text/javascript" lang="javascript" src="script.js"></script>
+<script>
+
+    function GigyaLoadFunctions() {
+         
+        try {
+            gigya.accounts.session.verify({
+                callback: function(e) {
+                    console.log("session.verify ", e);
+                    if(e.errorCode == 0) {
+                        // a session is open
+                        window.location.href="/account.html";
+                    } else {
+                        // non session
+                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-register-screen',enabledProviders: 'googleplus,facebook,apple'});
+                    }
+                }
+            });
+        }catch(e) {
+            console.e(e);
+        }
+
+        gigya.socialize.addEventHandlers({
+            onLogin: function () {
+                alert("user logged successfull");            
+                window.location.href="/account.html";
+            },
+            onLogout: function () {
+                alert("user logout successfull");            
+                window.location.href="/index.html";
+            },
+
+        });
+    }
+
+    function onGigyaServiceReady() {
+        GigyaLoadFunctions();
+    }
+                
+    var params = getParametersFromUrl();
+    loadGigya( params['lang'] || 'en' );
+    </script>    
+    <link rel="stylesheet" href="/style.css">  
+</head>
+<body>
+<div class="header">
+    <img src="/img/logo.png">
+</div>
+<div class="langs">
+    <ul>
+        <li><a href="?lang=en">English(en)</a></li>
+        <li><a href="?lang=fr">French(fr)</a></li>
+        <li><a href="?lang=de">German(de)</a></li>
+        <li><a href="?lang=it">Italian(it)</a></li>
+        <li><a href="?lang=es">Spanish(es)</a></li>
+        <li><a href="?lang=pt">Portuguese(pt)</a></li>
+        <li><a href="?lang=ru">Russian(ru)</a></li>
+        <li><a href="?lang=ar">Arabic(ar)</a></li>
+        <li><a href="?lang=fa">Parsi(fa)</a></li>
+        <li><a href="?lang=tr">Turkish(tr)</a></li>
+        <li><a href="?lang=el">Greek(el)</a></li>
+        <li><a href="?lang=hu">Hungarian(hu)</a></li>
+    </ul>
+</div>
+<div class="block-content">
+    <div id="containerlogin"></div>
+</div>
+</body>
+</html>
