@@ -34,3 +34,33 @@ function getParametersFromUrl(aURL) {
 
     return vars;
 }
+
+function saveSubscriptions(nlselected , callBackWhenLogin) {
+    try {
+        console.log(" --> is new user and must save subscription", e);
+        //console.log("nlselected ", nlselected);
+        
+        let nls = nlselected.split(',');
+        let subscriptionObject = {};
+        for (i = 0; i < nls.length; i++) {
+            let nlitem = nls[i];
+            nlitemTrimLowerCase = nlitem.trim().toLowerCase();
+            console.log("nlitem:", nlitemTrimLowerCase);
+            subscriptionObject[nlitemTrimLowerCase] = {
+                email : {
+                    isSubscribed: true
+                }
+            }
+        }
+        
+        console.log("subscriptionObject :", subscriptionObject);
+        gigya.accounts.setAccountInfo(
+            {
+                subscriptions : subscriptionObject,
+                callback: callBackWhenLogin
+            }
+        );
+    } catch(e) {
+        console.error(e);
+    }
+}

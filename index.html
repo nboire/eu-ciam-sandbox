@@ -40,59 +40,22 @@
         });
 
 
+        let onLoginHandler = function(e) {
+            console.log(e);
+            alert("user logged successfull");            
+            window.location.href="/account.html";
+        };
+
         gigya.socialize.addEventHandlers({
             onLogin: function (e) {
                 console.log("e onlogin", e);
-                let hasNlSelected = false;
-                if(e.newUser == true && e.providers != '' ) {
-                    // must save NL pre-selected NL
-                    try {
-                    console.log(" --> is new user from social provider and must save subscription", e);
-                    var nlselected = e.context.nl;
-                    console.log("nlselected ", nlselected);
-                    
-                    let nls = nlselected.split(',');
-                    let subscriptionObject = {};
-                    for (i = 0; i < nls.length; i++) {
-                        let nlitem = nls[i];
-                        console.log("nlitem:", nlitem);
-                        subscriptionObject[nlitem] = {
-                            email : {
-                                isSubscribed: true
-                            }
-                        }
-                    }
-                    hasNlSelected = true;
-                    console.log("subscriptionObject :", subscriptionObject);
-                    gigya.accounts.setAccountInfo(
-                        {
-                            subscriptions : subscriptionObject,
-                            callback: function(e) {
-                                console.log(e);
-                                alert("user logged successfull");            
-                                window.location.href="/account.html";
-                            }
-                        }
-                    );
-                    /*
-                    gigya.accounts.setAccountInfo({
-                        'subscriptions' : {
-                            'green': {
-                                'email' : {
-                                    'isSubscribed':true
-                                }
-                            }
-                        }
-                    });
-                    */
-                    // subscriptions.green.email.isSubscribed=true;
-                    } catch(e) {
-                        console.error(e);
-                    }
+                let hasNlSelected = e.context && e.context.nl;
+                if(hasNlSelected) {
+                    var nlSelected = e.context.nl;
+                    saveSubscriptions(nlSelected, onLoginHandler);                        
                 }
-                if(hasNlSelected == false) {
-                    alert("user logged successfull");            
-                    window.location.href="/account.html";
+                else {
+                    onLoginHandler();
                 }
             },
             onLogout: function () {
