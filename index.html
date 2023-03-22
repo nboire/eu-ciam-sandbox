@@ -31,7 +31,8 @@
 
 
         gigya.socialize.addEventHandlers({
-            onLogin: function () {
+            onLogin: function (e) {
+                console.log("e onlogin", e);
                 alert("user logged successfull");            
                 window.location.href="/account.html";
             },
