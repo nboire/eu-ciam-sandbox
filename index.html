@@ -18,6 +18,17 @@
                         window.location.href="/account.html";
                     } else {
                         // non session
+                        
+                        let nlselected = params['nl'];
+                        let nls = nlselected.split(',');
+                        window.nls = {};
+                        for (i = 0; i < nls.length; i++) {
+                            let nlitem = nls[i];
+                            nlItemTrimLowerCase = nlitem.trim().toLowerCase();
+                            window.nls.push(nlItemTrimLowerCase);
+                        }
+
+
                         gigya.accounts.showScreenSet({
                             containerID:'containerlogin', 
                             screenSet:'Euronews-RegistrationLogin', 

@@ -44,9 +44,12 @@ function saveSubscriptions(nlselected , callBackWhenLogin) {
         let subscriptionObject = {};
         for (i = 0; i < nls.length; i++) {
             let nlitem = nls[i];
-            nlitemTrimLowerCase = nlitem.trim().toLowerCase();
-            console.log("nlitem:", nlitemTrimLowerCase);
-            subscriptionObject[nlitemTrimLowerCase] = {
+            nlItemTrimLowerCase = nlitem.trim().toLowerCase();
+
+            // TODO validate if nlItemTrimLowerCase is in authorized subscriptions keys.
+
+            console.log("nlitem:", nlItemTrimLowerCase);
+            subscriptionObject[nlItemTrimLowerCase] = {
                 email : {
                     isSubscribed: true
                 }
