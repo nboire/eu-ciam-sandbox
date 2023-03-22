@@ -21,12 +21,13 @@
                         
                         let nlselected = params['nl'];
                         let nls = nlselected.split(',');
-                        window.nls = {};
+                        var _nls = [];
                         for (i = 0; i < nls.length; i++) {
                             let nlitem = nls[i];
                             nlItemTrimLowerCase = nlitem.trim().toLowerCase();
-                            window.nls.push(nlItemTrimLowerCase);
+                            _nls.push(nlItemTrimLowerCase);
                         }
+                        window.nls = _nls;
 
 
                         gigya.accounts.showScreenSet({
