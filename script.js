@@ -37,7 +37,7 @@ function getParametersFromUrl(aURL) {
 
 function saveSubscriptions(nlselected , callBackWhenLogin) {
     try {
-        console.log(" --> is new user and must save subscription", e);
+        console.log(" --> is new user and must save subscription");
         //console.log("nlselected ", nlselected);
         
         let nls = nlselected.split(',');
