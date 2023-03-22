@@ -54,7 +54,12 @@
                     let subscriptionObject = {};
                     for (i = 0; i < nls.length; i++) {
                         let nlitem = nls[i];
-                        subscriptionObject[nlitem].email.isSubscribed = true;
+                        console.log("nlitem:", nlitem);
+                        subscriptionObject[nlitem] = {
+                            email : {
+                                isSubscribed: true
+                            }
+                        }
                     }
                     console.log("subscriptionObject :", subscriptionObject);
                     gigya.accounts.setAccountInfo({
