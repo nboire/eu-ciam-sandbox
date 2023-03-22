@@ -4,8 +4,11 @@
 <script type="text/javascript" lang="javascript" src="script.js"></script>
 <script>
 
+    var params = getParametersFromUrl();
+    
     function GigyaLoadFunctions() {
-         
+
+ 
         try {
             gigya.accounts.session.verify({
                 callback: function(e) {
@@ -15,7 +18,14 @@
                         window.location.href="/account.html";
                     } else {
                         // non session
-                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-login-screen',enabledProviders: 'googleplus,facebook,apple'});
+                        gigya.accounts.showScreenSet({
+                            containerID:'containerlogin', 
+                            screenSet:'Euronews-RegistrationLogin', 
+                            startScreen:'gigya-login-screen',
+                            enabledProviders: 'googleplus,facebook,apple',
+                            context: {
+                                nl: params['nl']
+                            }});
                     }
                 }
             });
@@ -33,6 +43,11 @@
         gigya.socialize.addEventHandlers({
             onLogin: function (e) {
                 console.log("e onlogin", e);
+                if(e.newUser == true && e.providers != '' ) {
+                    // must save NL pre-selected NL
+                    console.log(" --> is new user from social provider and must save subscription", e);
+
+                }
                 alert("user logged successfull");            
                 window.location.href="/account.html";
             },
@@ -47,7 +62,6 @@
         GigyaLoadFunctions();
     }
                 
-    var params = getParametersFromUrl();
     loadGigya( params['lang'] || navigator.language || navigator.userLanguage);
     </script>    
     <link rel="stylesheet" href="/style.css">  
