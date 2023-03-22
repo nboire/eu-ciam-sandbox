@@ -45,15 +45,18 @@
                 console.log("e onlogin", e);
                 if(e.newUser == true && e.providers != '' ) {
                     // must save NL pre-selected NL
+                    try {
                     console.log(" --> is new user from social provider and must save subscription", e);
                     var nlselected = e.context.nl;
                     console.log("nlselected ", nlselected);
-                    let nls = nlselected.split(",");
+                    
+                    let nls = nlselected.split(',');
                     let subscriptionObject = {};
                     for (i = 0; i < nls.length; i++) {
-                        subscriptionObject[nls[i]].email.isSubscribed = true;
+                        let nlitem = nls[i];
+                        subscriptionObject[nlitem].email.isSubscribed = true;
                     }
-                    
+                    console.log("subscriptionObject :", subscriptionObject);
                     gigya.accounts.setAccountInfo({
                         'subscriptions' : subscriptionObject,
                         'callback': function(e) {
@@ -72,6 +75,9 @@
                     });
                     */
                     // subscriptions.green.email.isSubscribed=true;
+                    } catch(e) {
+                        console.error(e);
+                    }
                 }
                 alert("user logged successfull");            
                 window.location.href="/account.html";
