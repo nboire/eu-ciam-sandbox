@@ -46,7 +46,18 @@
                 if(e.newUser == true && e.providers != '' ) {
                     // must save NL pre-selected NL
                     console.log(" --> is new user from social provider and must save subscription", e);
-
+                    var nlselected = e.context.nl;
+                    console.log("nlselected ", nlselected);
+                    gigya.accounts.setAccountInfo({
+                        'subscriptions' : {
+                            'green': {
+                                'email' : {
+                                    'isSubscribed':true
+                                }
+                            }
+                        }
+                    });
+                    // subscriptions.green.email.isSubscribed=true;
                 }
                 alert("user logged successfull");            
                 window.location.href="/account.html";
