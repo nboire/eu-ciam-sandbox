@@ -37,8 +37,7 @@ function getParametersFromUrl(aURL) {
 
 function saveSubscriptions(nlselected , callBackWhenLogin) {
     try {
-        console.log(" --> is new user and must save subscription");
-        //console.log("nlselected ", nlselected);
+        console.log(" --> enrich subscription : " , nlselected);
         
         let nls = nlselected.split(',');
         let subscriptionObject = {};
@@ -47,8 +46,7 @@ function saveSubscriptions(nlselected , callBackWhenLogin) {
             nlItemTrimLowerCase = nlitem.trim().toLowerCase();
 
             // TODO validate if nlItemTrimLowerCase is in authorized subscriptions keys.
-
-            console.log("nlitem:", nlItemTrimLowerCase);
+            console.log(" --> add subscription:", nlItemTrimLowerCase);
             subscriptionObject[nlItemTrimLowerCase] = {
                 email : {
                     isSubscribed: true
@@ -56,13 +54,11 @@ function saveSubscriptions(nlselected , callBackWhenLogin) {
             }
         }
         
-        console.log("subscriptionObject :", subscriptionObject);
-        gigya.accounts.setAccountInfo(
-            {
+        //console.log("subscriptionObject :", subscriptionObject);
+        gigya.accounts.setAccountInfo({
                 subscriptions : subscriptionObject,
                 callback: callBackWhenLogin
-            }
-        );
+        });
     } catch(e) {
         console.error(e);
     }

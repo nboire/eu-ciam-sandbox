@@ -7,7 +7,7 @@
     var params = getParametersFromUrl();
     window.gyg_eu_nl = params['nl'];
     console.log("window.gig_eu_nl :", window.gig_eu_nl);
-    
+
     function GigyaLoadFunctions() {
 
         try {
@@ -24,22 +24,13 @@
                             screenSet:'Euronews-RegistrationLogin', 
                             startScreen:'gigya-login-screen',
                             enabledProviders: 'googleplus,facebook,apple',
-                            context: {
-                                nl: window.gyg_eu_nl
-                            }});
+                        });
                     }
                 }
             });
         }catch(e) {
             console.e(e);
         }
-        gigya.accounts.addEventHandlers({
-            onConnectionAdded: function (e) {
-                alert("user onConnectionAdded");
-                console.log("onConnectionAdded", e);
-            },
-        });
-
 
         let onLoginHandler = function(e) {
             console.log(e);
@@ -50,10 +41,8 @@
         gigya.socialize.addEventHandlers({
             onLogin: function (e) {
                 console.log("e onlogin", e);
-                let hasNlSelected = e.context && e.context.nl;
-                if(hasNlSelected) {
-                    var nlSelected = e.context.nl;
-                    saveSubscriptions(nlSelected, onLoginHandler);
+                if(window.gyg_eu_nl) {
+                    saveSubscriptions(window.gyg_eu_nl, onLoginHandler);
                 }
                 else {
                     onLoginHandler();
