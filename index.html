@@ -5,13 +5,9 @@
 <script>
 
     var params = getParametersFromUrl();
-    try {
-        let nlselected = params['nl'];
-        window.nls = nlselected;
-    }catch(e) {
-        console.error(e);
-    }
-
+    window.gyg_eu_nl = params['nl'];
+    console.log("window.gig_eu_nl :", window.gig_eu_nl);
+    
     function GigyaLoadFunctions() {
 
         try {
@@ -29,7 +25,7 @@
                             startScreen:'gigya-login-screen',
                             enabledProviders: 'googleplus,facebook,apple',
                             context: {
-                                nl: params['nl']
+                                nl: window.gyg_eu_nl
                             }});
                     }
                 }
@@ -57,7 +53,7 @@
                 let hasNlSelected = e.context && e.context.nl;
                 if(hasNlSelected) {
                     var nlSelected = e.context.nl;
-                    saveSubscriptions(nlSelected, onLoginHandler);                        
+                    saveSubscriptions(nlSelected, onLoginHandler);
                 }
                 else {
                     onLoginHandler();
