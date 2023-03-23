@@ -10,7 +10,6 @@ function loadGigya(lang, callback) {
     s.async = true;
     s.src = "//cdns.gigya.com/js/gigya.js?apiKey=" + window.__gigyaConf.APIKey + "&lang=" + langLowercase;
     s.onload = callback;
-    //s[(s.innerText===undefined?"textContent":"innerText")] = "{ EuronewsEdition:'"+langLowercase+"'}";
     document.getElementsByTagName('head')[0].appendChild(s);
 
 }
