@@ -5,10 +5,15 @@
 <script>
 
     var params = getParametersFromUrl();
-    
+    try {
+        let nlselected = params['nl'];
+        window.nls = nlselected;
+    }catch(e) {
+        console.error(e);
+    }
+
     function GigyaLoadFunctions() {
 
- 
         try {
             gigya.accounts.session.verify({
                 callback: function(e) {
@@ -17,19 +22,7 @@
                         // a session is open
                         window.location.href="/account.html";
                     } else {
-                        // non session
-                        
-                        let nlselected = params['nl'];
-                        let nls = nlselected.split(',');
-                        var _nls = [];
-                        for (i = 0; i < nls.length; i++) {
-                            let nlitem = nls[i];
-                            nlItemTrimLowerCase = nlitem.trim().toLowerCase();
-                            _nls.push(nlItemTrimLowerCase);
-                        }
-                        window.nls = _nls;
-
-
+                        // non session                        
                         gigya.accounts.showScreenSet({
                             containerID:'containerlogin', 
                             screenSet:'Euronews-RegistrationLogin', 
