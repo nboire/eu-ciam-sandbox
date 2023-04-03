@@ -1,12 +1,18 @@
 <html>
   <head>
     <script type="text/javascript" src="https://cdns.gigya.com/js/gigya.js?apiKey=4_P1PsLai8qySAAQGymJ4UuA"></script>
-	
+	  <!--  
+/Error message: An error code is passed to the redirection URL in the query string, as 'errorCode' and 'errorMessage' parameters. 
+These can provide information about the login attempt, such as "expired code", and used to render the redirection URL accordingly 
+(e.g., include a message "Code has expired, click here to resend code"). 
+For example: https://example.com/?errorCode=403002&errorMessage=Requesthasexpired&lang=FR-fr
+	-->
     <script type="text/javascript" lang="javascript" src="script.js"></script>
     <script>
         gigya.socialize.addEventHandlers({
             onLogin: function () {
-                alert("user logged successfull");            
+                alert("user logged successfull");
+		// redirection to account completion form gender, birthdate
                 window.location.href="/account.html";
             },
             onLogout: function () {
