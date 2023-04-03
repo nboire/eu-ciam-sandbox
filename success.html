@@ -1,8 +1,21 @@
 <html>
   <head>
+    <script type="text/javascript" src="https://cdns.gigya.com/js/gigya.js?apiKey=4_P1PsLai8qySAAQGymJ4UuA"></script>
+	
     <script type="text/javascript" lang="javascript" src="script.js"></script>
     <script>
-    
+        gigya.socialize.addEventHandlers({
+            onLogin: function () {
+                alert("user logged successfull");            
+                window.location.href="/account.html";
+            },
+            onLogout: function () {
+                alert("user logout successfull");            
+                window.location.href="/index.html";
+            },
+
+        });
+      
         function GigyaLoadFunctions() {
              
             try {
@@ -21,26 +34,12 @@
             }catch(e) {
                 console.e(e);
             }
-    
-            gigya.socialize.addEventHandlers({
-                onLogin: function () {
-                    alert("user logged successfull");            
-                    window.location.href="/account.html";
-                },
-                onLogout: function () {
-                    alert("user logout successfull");            
-                    window.location.href="/index.html";
-                },
-    
-            });
         }
     
         function onGigyaServiceReady() {
             GigyaLoadFunctions();
         }
-                    
-        var params = getParametersFromUrl();
-        loadGigya( params['lang'] || navigator.language || navigator.userLanguage);
+        
         </script>    
         <link rel="stylesheet" href="/style.css">  
   </head>
