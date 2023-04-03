@@ -39,7 +39,11 @@
         let onLoginHandler = function(e) {
             console.log(e);
             alert("user logged successfull");            
-            window.location.href="/account.html";
+            if(window.gig_eu_nl) {
+                window.location.href="/newsletters.html";
+            } else {
+                window.location.href="/account.html";
+            }
         };
 
         gigya.socialize.addEventHandlers({
