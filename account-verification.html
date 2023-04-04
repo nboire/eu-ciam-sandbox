@@ -7,45 +7,14 @@ These can provide information about the login attempt, such as "expired code", a
 (e.g., include a message "Code has expired, click here to resend code"). 
 For example: https://example.com/?errorCode=403002&errorMessage=Requesthasexpired&lang=FR-fr
 	-->
-    <script type="text/javascript" lang="javascript" src="script.js"></script>
     <script>
         gigya.socialize.addEventHandlers({
             onLogin: function () {
                 alert("user logged successfull");
 		        // redirection to account completion form gender, birthdate
                 window.location.href="/account-verified.html";
-            },
-            onLogout: function () {
-                alert("user logout successfull");            
-                window.location.href="/index.html";
-            },
-
-        });
-      
-        function GigyaLoadFunctions() {
-             
-            try {
-                gigya.accounts.session.verify({
-                    callback: function(e) {
-                        console.log("session.verify ", e);
-                        if(e.errorCode == 0) {
-                            // a session is open
-                            window.location.href="/index.html";
-                        } else {
-                            // non session
-                            gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-email-verify-screen',enabledProviders: 'googleplus,facebook,apple'});
-                        }
-                    }
-                });
-            }catch(e) {
-                console.e(e);
             }
-        }
-    
-        function onGigyaServiceReady() {
-            GigyaLoadFunctions();
-        }
-        
+        });  
         </script>    
         <link rel="stylesheet" href="/style.css">  
   </head>
