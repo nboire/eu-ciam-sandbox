@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <script type="text/javascript" lang="javascript" src="script.js"></script>
+    <script>
+    
+        function GigyaLoadFunctions() {
+             
+            try {
+                gigya.accounts.session.verify({
+                    callback: function(e) {
+                        console.log("session.verify ", e);
+                        if(e.errorCode == 0) {
+                            // a session is open
+                            gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-ProfileUpdate', startScreen:'gigya-update-subscription-screen',enabledProviders: 'googleplus,facebook,apple'});
+                        } else {
+                            // non session
+                            window.location.href="/index.html";
+                        }
+                    }
+                });
+            }catch(e) {
+                console.e(e);
+            }
+    
+            gigya.socialize.addEventHandlers({
+                onLogin: function () {
+                    alert("user logged successfull");            
+                    window.location.href="/account.html";
+                },
+                onLogout: function () {
+                    alert("user logout successfull");            
+                    window.location.href="/index.html";
+                },
+    
+            });
+        }
+    
+        function onGigyaServiceReady() {
+            GigyaLoadFunctions();
+        }
+                    
+        var params = getParametersFromUrl();
+        loadGigya( params['lang'] || navigator.language || navigator.userLanguage);
+        </script>    
+        <link rel="stylesheet" href="/style.css">  
+  </head>
+  <body>
+    <div class="header">
+      <img src="/img/logo.png">
+    </div>
+    <div class="langs">
+        <ul>
+            <li><a href="?lang=en">English(en)</a></li>
+            <li><a href="?lang=fr">French(fr)</a></li>
+            <li><a href="?lang=de">German(de)</a></li>
+            <li><a href="?lang=it">Italian(it)</a></li>
+            <li><a href="?lang=es">Spanish(es)</a></li>
+            <li><a href="?lang=pt">Portuguese(pt)</a></li>
+            <li><a href="?lang=ru">Russian(ru)</a></li>
+            <li><a href="?lang=ar">Arabic(ar)</a></li>
+            <li><a href="?lang=fa">Parsi(fa)</a></li>
+            <li><a href="?lang=tr">Turkish(tr)</a></li>
+            <li><a href="?lang=el">Greek(el)</a></li>
+            <li><a href="?lang=hu">Hungarian(hu)</a></li>
+        </ul>
+    </div>
+    <div>
+      <a href="account.html">Personal informations</a>
+      <a href="account-newsletters.html">Newsletters</a>
+      <a href="account-settings.html">Settings</a>
+      <a href="#" onclick="gigya.accounts.logout();"
+        >Logout</a
+      >
+    </div>
+    <div class="block-content">
+        <div id="containerlogin"></div>
+    </div>
+  </body>
+</html>
