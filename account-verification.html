@@ -7,24 +7,16 @@ These can provide information about the login attempt, such as "expired code", a
 (e.g., include a message "Code has expired, click here to resend code"). 
 For example: https://example.com/?errorCode=403002&errorMessage=Requesthasexpired&lang=FR-fr
 	-->
+    <script type="text/javascript" lang="javascript" src="script.js"></script>
     <script>
         gigya.socialize.addEventHandlers({
             onLogin: function (e) {
                 alert("user logged successfull");
-                console.log("user logged ",e);
-                console.log("user logged ",e.user.initialSubscription);
-                if(e.user.initialSubscription) {
-                  console.log(" we must update subscription ");
-                  let onLoginHandler = function(e) {
-                      console.log(e);
-                      alert("user logged successfull");            
+                let onLoginHandler = function(e) {
+                      console.log("redirect after updateFromInitialSubscription");
                       window.location.href="/account-verified.html";
                   };
-                  saveSubscriptions(e.user.initialSubscription, onLoginHandler);
-                } else {
-		              // redirection to account completion form gender, birthdate
-                  window.location.href="/account-verified.html";
-                }
+                updateFromInitialSubscription(onLoginHandler);                
             }
         });  
         </script>    

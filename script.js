@@ -62,3 +62,12 @@ function saveSubscriptions(nlselected , callBackWhenLogin) {
         console.error(e);
     }
 }
+
+function updateFromInitialSubscription(callback) {
+    let callbackAccountInfo = function(e) {
+        if(e.data.initialSubscription) {
+            saveSubscriptions(e.data.initialSubscription, callback);
+        }
+    };
+    gigya.accounts.getAccountInfo(callbackAccountInfo);
+}
