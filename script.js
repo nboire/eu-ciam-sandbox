@@ -65,7 +65,8 @@ function saveSubscriptions(nlselected , callBackWhenLogin) {
 
 function updateFromInitialSubscription(callback) {
     let callbackAccountInfo = function(e) {
-        if(e.data.initialSubscription) {
+        console.log("callbackAccountInfo", e);
+        if(e.data.initialSubscription && e.data.initialSubscription != '') {
             saveSubscriptions(e.data.initialSubscription, callback);
         }
     };
