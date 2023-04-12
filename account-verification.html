@@ -12,6 +12,7 @@ For example: https://example.com/?errorCode=403002&errorMessage=Requesthasexpire
             onLogin: function (e) {
                 alert("user logged successfull");
                 console.log("user logged ",e);
+                console.log("user logged ",e.user);
 		        // redirection to account completion form gender, birthdate
                 window.location.href="/account-verified.html";
             }
