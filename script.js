@@ -55,6 +55,9 @@ function saveSubscriptions(nlselected , callBackWhenLogin) {
         
         //console.log("subscriptionObject :", subscriptionObject);
         gigya.accounts.setAccountInfo({
+                data: {
+                    initialSubscription: '',
+                },
                 subscriptions : subscriptionObject,
                 callback: callBackWhenLogin
         });
