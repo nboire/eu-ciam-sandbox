@@ -70,5 +70,5 @@ function updateFromInitialSubscription(callback) {
             saveSubscriptions(e.data.initialSubscription, callback);
         }
     };
-    gigya.accounts.getAccountInfo(callbackAccountInfo);
+    gigya.accounts.getAccountInfo({callback:callbackAccountInfo});
 }
