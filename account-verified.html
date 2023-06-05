@@ -11,7 +11,7 @@
                     console.log("session.verify ", e);
                     if(e.errorCode == 0) {
                         // a session is open
-                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'Euronews-RegistrationLogin', startScreen:'gigya-email-verified-completion-screen',enabledProviders: 'googleplus,facebook,apple'});
+                        gigya.accounts.showScreenSet({containerID:'containerlogin', screenSet:'euronews-fpd-RegistrationLoginLogin', startScreen:'gigya-email-verified-completion-screen',enabledProviders: 'googleplus,facebook,apple'});
                     } else {
                         // non session
                         window.location.href="/index.html";
