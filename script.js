@@ -1,6 +1,6 @@
 // Set SCREEN_CONTAINER
 window.__gigyaConf = window.__gigyaConf || {};
-window.__gigyaConf.APIKey = "4_P1PsLai8qySAAQGymJ4UuA";
+window.__gigyaConf.APIKey = "4_qZAULRWV22yIqltbPy5gSA";
 
 // Add Gigya JS to HEAD
 function loadGigya(lang, callback) {
