@@ -29,12 +29,15 @@
 
         gigya.socialize.addEventHandlers({
             onLogin: function () {
-                alert("user logged successfull");            
-                window.location.href="/account.html";
+                alert("user login successfull , redirect to openid");            
+                window.location.href = gigya.utils.URL.addParamsToURL("OPProxyPage.html", {
+                    mode: 'afterLogin'
+                });
+                //window.location.href="/account.html";
             },
             onLogout: function () {
                 alert("user logout successfull");            
-                window.location.href="/index.html";
+                //window.location.href="/index.html";
             },
 
         });
